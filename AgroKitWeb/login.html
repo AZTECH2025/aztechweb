@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Login - Grupo Aztech</title>
+  <style>
+    /* tu CSS aquí… */
+  </style>
+</head>
+<body>
+  <img src="logoaztech.png" alt="Logo Grupo Aztech" />
+  <h1>Inicia Sesión</h1>
+  <button onclick="loginWithGoogle()">Ingresar con Google</button>
+  <button onclick="loginWithFacebook()">Ingresar con Facebook</button>
+  <button onclick="loginWithPhone()">Ingresar con Celular</button>
+
+  <!-- compat scripts -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyC9iRact7Iul8uzw98U5IXqcOp3NbdMgjQ",
+      authDomain: "agrokit-2025.firebaseapp.com",
+      projectId: "agrokit-2025",
+      storageBucket: "agrokit-2025.appspot.com",
+      messagingSenderId: "1059070535464",
+      appId: "1:1059070535464:web:6a5989e95d6d4c296dd21d"
+    };
+    // Inicializa Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    function loginWithGoogle() {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      auth.signInWithPopup(provider)
+        .then(result => {
+          alert("Bienvenido " + result.user.displayName);
+          // aquí rediriges:
+          // window.location.href = tipo === 'educativo' ? 'edu.html' : 'ind.html';
+        })
+        .catch(err => alert(err.message));
+    }
+
+    function loginWithFacebook() {
+      const provider = new firebase.auth.FacebookAuthProvider();
+      auth.signInWithPopup(provider)
+        .then(result => alert("Bienvenido " + result.user.displayName))
+        .catch(err => alert(err.message));
+    }
+
+    function loginWithPhone() {
+      alert("Activa y configura el login telefónico en Firebase Console para usarlo.");
+    }
+  </script>
+</body>
+</html>

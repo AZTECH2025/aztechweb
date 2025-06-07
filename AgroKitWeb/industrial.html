@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Agrotech Industrial | Grupo Aztech</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #232526 0%, #414345 100%);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .container {
+      background: #f4f8fb;
+      border-radius: 22px;
+      box-shadow: 0 6px 32px #23252633;
+      padding: 2.5rem 2rem 2rem 2rem;
+      max-width: 520px;
+      width: 95%;
+      text-align: center;
+      border: 2px solid #145a32;
+    }
+    .logo {
+      width: 100px;
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 2px 8px #23252644);
+    }
+    .main-img {
+      width: 120px;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      border: 2px solid #145a32;
+      object-fit: cover;
+    }
+    h1 {
+      font-size: 2.2rem;
+      color: #145a32;
+      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+    p {
+      color: #232526;
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+    }
+    .productos {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .producto {
+      background: linear-gradient(90deg, #fff 60%, #e0e0e0 100%);
+      border-radius: 14px;
+      box-shadow: 0 2px 12px #23252611;
+      padding: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      text-align: left;
+      border-left: 6px solid #145a32;
+      position: relative;
+    }
+    .producto img {
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 12px;
+      background: #e0e0e0;
+      border: 2px solid #145a32;
+      box-shadow: 0 2px 8px #23252622;
+    }
+    .producto-desc {
+      flex: 1;
+      color: #232526;
+      font-weight: 600;
+    }
+    .ver-mas {
+      background: #145a32;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      padding: 0.6rem 1.3rem;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      margin-left: 0.5rem;
+      margin-bottom: 0.3rem;
+      box-shadow: 0 2px 8px #23252622;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .ver-mas:hover {
+      background: #27ae60;
+      transform: scale(1.05);
+    }
+    .volver {
+      margin-top: 2rem;
+      background: #145a32;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      padding: 0.7rem 2rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      box-shadow: 0 2px 8px #23252622;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .volver:hover {
+      background: #232526;
+    }
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0; top: 0; width: 100vw; height: 100vh;
+      background: rgba(20,90,50,0.15);
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background: #fff;
+      border-radius: 14px;
+      padding: 2rem 1.5rem;
+      max-width: 340px;
+      width: 90%;
+      box-shadow: 0 4px 24px #23252644;
+      text-align: left;
+      position: relative;
+      border: 2px solid #145a32;
+    }
+    .close {
+      position: absolute;
+      top: 0.7rem;
+      right: 1rem;
+      font-size: 1.3rem;
+      color: #145a32;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    @media (max-width: 600px) {
+      .productos { gap: 0.7rem; }
+      .producto { flex-direction: column; align-items: flex-start; }
+      .producto img { margin-bottom: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="logoaztech.png" alt="Logo Grupo Aztech" class="logo" />
+    <img src="inverUrbano.png" alt="Agrotech Industrial" class="main-img" />
+    <h1>Agrotech Industrial</h1>
+    <p>
+      Soluciones robustas y profesionales para la agricultura moderna.<br>
+      Tecnología, automatización y fuerza para el campo del futuro.
+    </p>
+    <div class="productos">
+      <div class="producto">
+        <img src="inverUrbano1.png" alt="Invernadero Urbano 12x20" />
+        <div class="producto-desc">
+          <strong>Invernadero Urbano 12m x 20m</strong><br>
+          Solución llave en mano para producción intensiva en ciudad o campo.
+        </div>
+        <button class="ver-mas" onclick="mostrarModal(0)">Ver más</button>
+      </div>
+      <div class="producto">
+        <img src="RiegoAutonomo.png" alt="Riego por Hectáreas" />
+        <div class="producto-desc">
+          <strong>Riego por Hectáreas</strong><br>
+          Sistemas inteligentes de riego automatizado para grandes extensiones.
+        </div>
+        <button class="ver-mas" onclick="mostrarModal(1)">Ver más</button>
+      </div>
+      <div class="producto">
+        <img src="droneyrobot1.png" alt="Robótica Móvil y Aérea" />
+        <div class="producto-desc">
+          <strong>Robótica Móvil y Aérea</strong><br>
+          Soluciones de monitoreo y automatización con robots terrestres y drones.
+        </div>
+        <button class="ver-mas" onclick="mostrarModal(2)">Ver más</button>
+      </div>
+    </div>
+    <button class="volver" onclick="window.location.href='index.html'">Volver al inicio</button>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="modalProducto">
+    <div class="modal-content" id="modalContent">
+      <span class="close" onclick="cerrarModal()">&times;</span>
+      <div id="modalInfo"></div>
+    </div>
+  </div>
+  <script>
+    // Información de los productos industriales
+    const productos = [
+      {
+        nombre: "Invernadero Urbano 12m x 20m",
+        caracteristicas: [
+          "Estructura profesional con materiales de alta durabilidad",
+          "Automatización de clima, riego y ventilación",
+          "Sensores de humedad, temperatura y CO₂",
+          "Instalación y capacitación incluidas"
+        ],
+        costo: "Desde $320,000 MXN"
+      },
+      {
+        nombre: "Riego por Hectáreas",
+        caracteristicas: [
+          "Sistemas de riego por goteo, aspersión o pivote central",
+          "Control remoto y programación por zonas",
+          "Sensores de humedad en suelo y clima",
+          "Ahorro de agua y optimización de recursos"
+        ],
+        costo: "Desde $85,000 MXN por hectárea"
+      },
+      {
+        nombre: "Robótica Móvil y Aérea",
+        caracteristicas: [
+          "Robots terrestres para monitoreo y labores agrícolas",
+          "Drones para mapeo, fumigación y vigilancia",
+          "Integración con plataformas de análisis de datos",
+          "Soporte y capacitación técnica"
+        ],
+        costo: "Desde $150,000 MXN"
+      }
+    ];
+
+    function mostrarModal(idx) {
+      const prod = productos[idx];
+      let html = `<h2>${prod.nombre}</h2><ul>`;
+      prod.caracteristicas.forEach(c => html += `<li>${c}</li>`);
+      html += `</ul><strong>Costo: ${prod.costo}</strong>`;
+      document.getElementById('modalInfo').innerHTML = html;
+      document.getElementById('modalProducto').style.display = 'flex';
+    }
+    function cerrarModal() {
+      document.getElementById('modalProducto').style.display = 'none';
+    }
+    // Cierra modal al hacer click fuera del contenido
+    window.onclick = function(event) {
+      const modal = document.getElementById('modalProducto');
+      if (event.target === modal) cerrarModal();
+    }
+  </script>
+</body>
+</html>

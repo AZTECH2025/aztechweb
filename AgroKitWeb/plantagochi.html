@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Plantagochi</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #48c6ef 0%, #27ae60 100%);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .container {
+      background: #f4f8fb;
+      border-radius: 22px;
+      box-shadow: 0 6px 32px #27ae6022;
+      padding: 2.5rem 2rem 2rem 2rem;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      border: 2px solid #27ae60;
+    }
+    h1 {
+      font-size: 2.1rem;
+      color: #145a32;
+      margin-bottom: 1.2rem;
+      letter-spacing: 1px;
+    }
+    .plantagochi-img {
+      width: 180px;
+      margin-bottom: 1.2rem;
+      border-radius: 16px;
+      border: 2px solid #27ae60;
+      box-shadow: 0 2px 12px #27ae6044;
+      background: #fff;
+    }
+    .ver-datos {
+      background: #27ae60;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      padding: 0.8rem 2rem;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      margin-top: 1.2rem;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 2px 8px #27ae6022;
+    }
+    .ver-datos:hover {
+      background: #145a32;
+      transform: scale(1.05);
+    }
+    .volver {
+      margin-top: 2rem;
+      background: #27ae60;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      padding: 0.7rem 2rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      box-shadow: 0 2px 8px #27ae6022;
+    }
+    .volver:hover {
+      background: #145a32;
+    }
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0; top: 0; width: 100vw; height: 100vh;
+      background: rgba(39,174,96,0.15);
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background: #fff;
+      border-radius: 14px;
+      padding: 2rem 1.5rem;
+      max-width: 340px;
+      width: 90%;
+      box-shadow: 0 4px 24px #27ae6044;
+      text-align: left;
+      position: relative;
+      border: 2px solid #27ae60;
+    }
+    .close {
+      position: absolute;
+      top: 0.7rem;
+      right: 1rem;
+      font-size: 1.3rem;
+      color: #27ae60;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    #datosPlanta {
+      font-size: 1.1rem;
+      margin-top: 1rem;
+      color: #145a32;
+    }
+    @media (max-width: 500px) {
+      .container { padding: 1.2rem 0.5rem 1.5rem 0.5rem; }
+      .plantagochi-img { width: 120px; }
+      .modal-content { padding: 1.2rem 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>¡Este es tu Plantagochi!</h1>
+    <img src="plantagochi.png" alt="Plantagochi" class="plantagochi-img" />
+    <br>
+    <button class="ver-datos" onclick="abrirModal()">Ver datos en tiempo real</button>
+  </div>
+  <button class="volver" onclick="window.location.href='index.html'">Volver al inicio</button>
+
+  <!-- Modal de datos -->
+  <div class="modal" id="modalDatos">
+    <div class="modal-content">
+      <span class="close" onclick="cerrarModal()">&times;</span>
+      <h2 style="color:#27ae60;">Datos en tiempo real</h2>
+      <div id="datosPlanta">Cargando datos...</div>
+    </div>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+  <script>
+    // Configuración de tu proyecto Firebase
+    const firebaseConfig = {
+      databaseURL: "https://agrokit-2025-default-rtdb.firebaseio.com/"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    // Función para abrir el modal y cargar datos
+    function abrirModal() {
+      document.getElementById('modalDatos').style.display = 'flex';
+      cargarDatos();
+    }
+    function cerrarModal() {
+      document.getElementById('modalDatos').style.display = 'none';
+    }
+    // Cierra modal al hacer click fuera del contenido
+    window.onclick = function(event) {
+      const modal = document.getElementById('modalDatos');
+      if (event.target === modal) cerrarModal();
+    }
+
+    // Leer datos en tiempo real de /Sensores
+    function cargarDatos() {
+      db.ref("Sensores").on("value", (snapshot) => {
+        const datos = snapshot.val();
+        if (datos) {
+          document.getElementById("datosPlanta").innerHTML = `
+            <strong>Humedad:</strong> ${datos.Huma} %<br>
+            <strong>Sensor Humedad:</strong> ${datos.HumS_data}<br>
+            <strong>Luz:</strong> ${datos.Luz_data}<br>
+            <strong>Temperatura:</strong> ${datos.Temp_data} °C
+          `;
+        } else {
+          document.getElementById("datosPlanta").innerText = "No hay datos disponibles.";
+        }
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Educativo | Grupo Aztech</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #e0f7fa 0%, #b2dfdb 100%);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .container {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px #0002;
+      padding: 2.5rem 2rem 2rem 2rem;
+      max-width: 480px;
+      width: 95%;
+      text-align: center;
+    }
+    .logo {
+      width: 90px;
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-size: 2rem;
+      color: #2c7a7b;
+      margin-bottom: 0.5rem;
+    }
+    p {
+      color: #444;
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+    .productos {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-top: 1.5rem;
+    }
+    .producto {
+      background: #f8fafc;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px #0001;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      text-align: left;
+    }
+    .producto img {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 8px;
+      background: #e0e0e0;
+    }
+    .producto-desc {
+      flex: 1;
+    }
+    .ver-mas {
+      background: #2c7a7b;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      padding: 0.5rem 1.2rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-left: 0.5rem;
+      margin-bottom: 0.3rem;
+    }
+    .ver-mas:hover {
+      background: #388e3c;
+    }
+    .volver {
+      margin-top: 2rem;
+      background: #2c7a7b;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      padding: 0.7rem 2rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .volver:hover {
+      background: #388e3c;
+    }
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0; top: 0; width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.35);
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background: #fff;
+      border-radius: 12px;
+      padding: 2rem 1.5rem;
+      max-width: 340px;
+      width: 90%;
+      box-shadow: 0 4px 24px #0003;
+      text-align: left;
+      position: relative;
+    }
+    .close {
+      position: absolute;
+      top: 0.7rem;
+      right: 1rem;
+      font-size: 1.3rem;
+      color: #2c7a7b;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    @media (max-width: 600px) {
+      .productos { gap: 0.7rem; }
+      .producto { flex-direction: column; align-items: flex-start; }
+      .producto img { margin-bottom: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="logoaztech.png" alt="Logo Grupo Aztech" class="logo" />
+    <img src="educativo.jpg" alt="Educativo" class="imagen-educativo" />
+    <h1>Soluciones Educativas</h1>
+    <p>
+      Kits, plataformas y recursos para el aprendizaje de tecnología agrícola.<br>
+      ¡Lleva la innovación del aula al campo!
+    </p>
+    <div class="productos">
+      <div class="producto">
+        <img src="mini_invernadero.jpg" alt="Mini Invernadero" />
+        <div class="producto-desc">
+          <strong>Mini Invernadero</strong><br>
+          Simula el ambiente de un invernadero real para prácticas escolares.
+        </div>
+        <button class="ver-mas" onclick="mostrarModal(0)">Ver más</button>
+      </div>
+      <div class="producto">
+        <img src="plantagochi.jpg" alt="Plantagochi" />
+        <div class="producto-desc">
+          <strong>Plantagochi</strong><br>
+          Mascota virtual de planta con sensores reales y monitoreo en tiempo real.
+        </div>
+        <button class="ver-mas" onclick="mostrarModal(1)">Ver más</button>
+        <button class="ver-mas" onclick="window.open('plantagochi.html', '_blank')">Ver Plantagochi Demo</button>
+      </div>
+      <div class="producto">
+        <img src="agrokitv2.jpg" alt="AgroKit V2" />
+        <div class="producto-desc">
+          <strong>AgroKit V2</strong><br>
+          Kit avanzado para proyectos STEAM, incluye conectividad y múltiples sensores.
+        </div>
+        <button class="ver-mas" onclick="mostrarModal(2)">Ver más</button>
+      </div>
+    </div>
+    <button class="volver" onclick="window.location.href='index.html'">Volver al inicio</button>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="modalProducto">
+    <div class="modal-content" id="modalContent">
+      <span class="close" onclick="cerrarModal()">&times;</span>
+      <div id="modalInfo"></div>
+    </div>
+  </div>
+  <script>
+    // Información de los productos
+    const productos = [
+      {
+        nombre: "Mini Invernadero",
+        caracteristicas: [
+          "Estructura compacta y fácil de armar",
+          "Incluye sensores de humedad y temperatura",
+          "Ideal para experimentos de germinación y crecimiento",
+          "Guía didáctica incluida"
+        ],
+        costo: "$1,200 MXN"
+      },
+      {
+        nombre: "Plantagochi",
+        caracteristicas: [
+          "Mascota virtual de planta con sensores reales",
+          "Monitoreo en tiempo real vía web",
+          "Alertas de riego y luz",
+          "Ideal para aprender sobre el cuidado de plantas"
+        ],
+        costo: "$950 MXN"
+      },
+      {
+        nombre: "AgroKit V2",
+        caracteristicas: [
+          "Kit avanzado con sensores de humedad, luz y temperatura",
+          "Conectividad WiFi y Bluetooth",
+          "Compatible con plataformas educativas",
+          "Incluye retos y proyectos STEAM"
+        ],
+        costo: "$1,800 MXN"
+      }
+    ];
+
+    function mostrarModal(idx) {
+      const prod = productos[idx];
+      let html = `<h2>${prod.nombre}</h2><ul>`;
+      prod.caracteristicas.forEach(c => html += `<li>${c}</li>`);
+      html += `</ul><strong>Costo: ${prod.costo}</strong>`;
+      document.getElementById('modalInfo').innerHTML = html;
+      document.getElementById('modalProducto').style.display = 'flex';
+    }
+    function cerrarModal() {
+      document.getElementById('modalProducto').style.display = 'none';
+    }
+    // Cierra modal al hacer click fuera del contenido
+    window.onclick = function(event) {
+      const modal = document.getElementById('modalProducto');
+      if (event.target === modal) cerrarModal();
+    }
+  </script>
+</body>
+</html>

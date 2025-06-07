@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Grupo Aztech</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #e0f7fa 0%, #b2dfdb 100%);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .container {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px #0002;
+      padding: 2.5rem 2rem 2rem 2rem;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+    }
+    .logo {
+      width: 120px;
+      margin-bottom: 1.2rem;
+    }
+    h1 {
+      font-size: 2.2rem;
+      color: #2c7a7b;
+      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+    }
+    h2 {
+      font-size: 1.1rem;
+      color: #444;
+      margin-bottom: 1.2rem;
+      font-weight: 400;
+    }
+    .eslogan {
+      font-size: 1.05rem;
+      color: #388e3c;
+      margin-bottom: 2rem;
+      font-style: italic;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+    .botones {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-top: 1.5rem;
+    }
+    .boton-grande {
+      background: linear-gradient(90deg, #2c7a7b 60%, #43cea2 100%);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.25rem;
+      font-weight: 600;
+      padding: 1.1rem 0;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      box-shadow: 0 2px 8px #0001;
+      width: 100%;
+    }
+    .boton-grande:hover {
+      background: linear-gradient(90deg, #285e61 60%, #388e3c 100%);
+      transform: translateY(-2px) scale(1.03);
+    }
+    @media (max-width: 500px) {
+      .container {
+        padding: 1.2rem 0.5rem 1.5rem 0.5rem;
+      }
+      h1 { font-size: 1.5rem; }
+      .boton-grande { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="logoaztech.png" alt="Logo Grupo Aztech" class="logo" />
+    <h1>Grupo Aztech</h1>
+    <h2>Automatización y servicios tecnológicos para la agricultura</h2>
+    <div class="eslogan">Desde el aula hasta la granja</div>
+    <div class="botones">
+      <button class="boton-grande" onclick="window.location.href='industrial.html'">Industrial</button>
+      <button class="boton-grande" onclick="window.location.href='educativo.html'">Educativo</button>
+    </div>
+  </div>
+</body>
+</html>
